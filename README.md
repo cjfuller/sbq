@@ -25,7 +25,7 @@ sbq.params(select_items="some_field")
 
 @sbq.query('destination_table', 'destination_dataset')
 def my_query_fn():
-    return """SELECT {some_field} FROM [dataset.my_awesome_table]"""
+    return """SELECT {select_items} FROM [dataset.my_awesome_table]"""
     
 my_query_fn()
 ```
