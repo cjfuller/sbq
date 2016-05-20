@@ -6,7 +6,7 @@ setup(
     description="Low-dependency package for automating bigquery queries.",
     author="Colin Fuller",
     author_email="colin@khanacademy.org",
-    url="github.com/cjfuller/sbq",
+    url="https://github.com/cjfuller/sbq",
     keywords=["bigquery"],
     classifiers=[
         "Programming Language :: Python",
