@@ -29,3 +29,15 @@ def my_query_fn():
     
 my_query_fn()
 ```
+
+Want to run a quick query and just print the output without saving it?
+Just don't supply a table or dataset, and the results will be printed as 
+JSON (though there's a limit to how many rows we can grab via the API).
+
+```python
+@sbq.query()
+def my_query_fn():
+    return """SELECT {select_items} FROM [dataset.my_awesome_table]"""
+    
+my_query_fn()
+```
