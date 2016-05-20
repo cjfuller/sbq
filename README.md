@@ -21,7 +21,7 @@ Then set up your query and run it, and any parameters will be interpolated using
 and output will be saved to your specified table.
 
 ```python
-sbq.params(select_items="some_field")
+sbq.params({'select_items': 'some_field'})
 
 @sbq.query('destination_table', 'destination_dataset')
 def my_query_fn():
