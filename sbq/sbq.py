@@ -155,13 +155,13 @@ def parse_query_results(result):
     ]
 
 
-def print_query_results(job_id):
-    results = parse_query_results(get_query_results(job_id))
+def print_query_results(results):
     print(json.dumps(results, sort_keys=False,
                      indent=2, separators=(',', ': ')))
 
 
-def run_query(query, dataset, table, retry_on_auth_fail=True):
+def run_query(query, dataset, table, retry_on_auth_fail=True,
+              print_result=False):
     destination = "--> [{d}.{t}]\n\n".format(
         d=dataset, t=table)
     query_repr = "{q}\n\n".format(
@@ -191,14 +191,18 @@ def run_query(query, dataset, table, retry_on_auth_fail=True):
             job_id = resp.json()['jobReference']['jobId']
             wait_for_completion(job_id)
             if dataset is None and table is None:
-                print_query_results(job_id)
+                results = parse_query_results(get_query_results(job_id))
+                if print_result:
+                    print_query_results(results)
+                return results
 
 
 def run_in_order(*queries):
     return (q() for q in queries)
 
 
-def query(destination_table=None, destination_dataset=None):
+def query(destination_table=None, destination_dataset=None,
+          print_result=False):
     destination_dataset = destination_dataset or params().get(
         'output_dataset', None)
 
@@ -208,6 +212,7 @@ def query(destination_table=None, destination_dataset=None):
             return run_query(
                 query,
                 destination_dataset and destination_dataset.format(**params()),
-                destination_table and destination_table.format(**params()))
+                destination_table and destination_table.format(**params()),
+                print_result=print_result)
         return new_fn
     return decorator
