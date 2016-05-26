@@ -39,5 +39,8 @@ JSON (though there's a limit to how many rows we can grab via the API).
 def my_query_fn():
     return """SELECT {select_items} FROM [dataset.my_awesome_table]"""
     
-my_query_fn()
+result = my_query_fn()
+print(result)
 ```
+
+There's also a pretty printer, which you can use via `@sbq.query(print_result=True)`.
