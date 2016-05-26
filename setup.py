@@ -2,7 +2,7 @@ from setuptools import setup
 setup(
     name="sbq",
     packages=["sbq"],
-    version="0.2.0",
+    version="0.3.0",
     description="Low-dependency package for automating bigquery queries.",
     author="Colin Fuller",
     author_email="colin@khanacademy.org",
